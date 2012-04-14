@@ -7,74 +7,74 @@ goog.require('goog.net.XhrIo');
 multi_jenk.client.main.$jenkins = jayq.core.$.call(null,"\uFDD0'#jenkins");
 multi_jenk.client.main.job_filter = cljs.core.atom.call(null,"");
 multi_jenk.client.main.job_status_to_btn_class = (function job_status_to_btn_class(status){
-var pred__298144__298147 = cljs.core._EQ_;
-var expr__298145__298148 = status;
+var pred__319713__319716 = cljs.core._EQ_;
+var expr__319714__319717 = status;
 
-if(cljs.core.truth_(pred__298144__298147.call(null,"red",expr__298145__298148)))
+if(cljs.core.truth_(pred__319713__319716.call(null,"red",expr__319714__319717)))
 {return "btn-danger";
 } else
 {return "";
 }
 });
 multi_jenk.client.main.job_satus_to_status_text = (function job_satus_to_status_text(status){
-var pred__298149__298152 = cljs.core._EQ_;
-var expr__298150__298153 = status;
+var pred__319718__319721 = cljs.core._EQ_;
+var expr__319719__319722 = status;
 
-if(cljs.core.truth_(pred__298149__298152.call(null,"red",expr__298150__298153)))
+if(cljs.core.truth_(pred__319718__319721.call(null,"red",expr__319719__319722)))
 {return "Failed";
 } else
-{if(cljs.core.truth_(pred__298149__298152.call(null,"grey",expr__298150__298153)))
+{if(cljs.core.truth_(pred__319718__319721.call(null,"grey",expr__319719__319722)))
 {return "Unknown";
 } else
-{throw (new Error(cljs.core.str.call(null,"No matching clause: ",expr__298150__298153)));
+{throw (new Error(cljs.core.str.call(null,"No matching clause: ",expr__319719__319722)));
 }
 }
 });
-var group__117661__auto____298155 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
+var group__117661__auto____319724 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
 
-multi_jenk.client.main.job = (function job(p__298156){
-var map__298157__298158 = p__298156;
-var map__298157__298159 = (cljs.core.truth_(cljs.core.seq_QMARK_.call(null,map__298157__298158))?cljs.core.apply.call(null,cljs.core.hash_map,map__298157__298158):map__298157__298158);
-var name__298160 = cljs.core.get.call(null,map__298157__298159,"name");
-var color__298161 = cljs.core.get.call(null,map__298157__298159,"color");
-var url__298162 = cljs.core.get.call(null,map__298157__298159,"url");
+multi_jenk.client.main.job = (function job(p__319725){
+var map__319726__319727 = p__319725;
+var map__319726__319728 = (cljs.core.truth_(cljs.core.seq_QMARK_.call(null,map__319726__319727))?cljs.core.apply.call(null,cljs.core.hash_map,map__319726__319727):map__319726__319727);
+var name__319729 = cljs.core.get.call(null,map__319726__319728,"name");
+var color__319730 = cljs.core.get.call(null,map__319726__319728,"color");
+var url__319731 = cljs.core.get.call(null,map__319726__319728,"url");
 
-var elem__117662__auto____298163 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'tr",cljs.core.PersistentVector.fromArray(["\uFDD0'td",cljs.core.PersistentVector.fromArray(["\uFDD0'a",cljs.core.ObjMap.fromObject(["\uFDD0'href"],{"\uFDD0'href":url__298162}),name__298160])]),cljs.core.PersistentVector.fromArray(["\uFDD0'td",cljs.core.PersistentVector.fromArray(["\uFDD0'button",cljs.core.ObjMap.fromObject(["\uFDD0'class"],{"\uFDD0'class":multi_jenk.client.main.job_status_to_btn_class.call(null,color__298161)}),multi_jenk.client.main.job_satus_to_status_text.call(null,color__298161)])])]));
+var elem__117662__auto____319732 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'tr",cljs.core.PersistentVector.fromArray(["\uFDD0'td",cljs.core.PersistentVector.fromArray(["\uFDD0'a",cljs.core.ObjMap.fromObject(["\uFDD0'href"],{"\uFDD0'href":url__319731}),name__319729])]),cljs.core.PersistentVector.fromArray(["\uFDD0'td",cljs.core.PersistentVector.fromArray(["\uFDD0'button",cljs.core.ObjMap.fromObject(["\uFDD0'class"],{"\uFDD0'class":multi_jenk.client.main.job_status_to_btn_class.call(null,color__319730)}),multi_jenk.client.main.job_satus_to_status_text.call(null,color__319730)])])]));
 
-elem__117662__auto____298163.setAttribute("crateGroup",group__117661__auto____298155);
-return elem__117662__auto____298163;
+elem__117662__auto____319732.setAttribute("crateGroup",group__117661__auto____319724);
+return elem__117662__auto____319732;
 });
-multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____298155;
-var group__117661__auto____298164 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
+multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____319724;
+var group__117661__auto____319733 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
 
-multi_jenk.client.main.jobs_list = (function jobs_list(p__298165){
-var map__298166__298167 = p__298165;
-var map__298166__298168 = (cljs.core.truth_(cljs.core.seq_QMARK_.call(null,map__298166__298167))?cljs.core.apply.call(null,cljs.core.hash_map,map__298166__298167):map__298166__298167);
-var jobs__298169 = cljs.core.get.call(null,map__298166__298168,"jobs");
-var name__298170 = cljs.core.get.call(null,map__298166__298168,"name");
+multi_jenk.client.main.jobs_list = (function jobs_list(p__319734){
+var map__319735__319736 = p__319734;
+var map__319735__319737 = (cljs.core.truth_(cljs.core.seq_QMARK_.call(null,map__319735__319736))?cljs.core.apply.call(null,cljs.core.hash_map,map__319735__319736):map__319735__319736);
+var jobs__319738 = cljs.core.get.call(null,map__319735__319737,"jobs");
+var name__319739 = cljs.core.get.call(null,map__319735__319737,"name");
 
-var elem__117662__auto____298171 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'div",cljs.core.PersistentVector.fromArray(["\uFDD0'h2",name__298170]),cljs.core.PersistentVector.fromArray(["\uFDD0'table.table.table-striped",cljs.core.PersistentVector.fromArray(["\uFDD0'thead",cljs.core.PersistentVector.fromArray(["\uFDD0'tr",cljs.core.PersistentVector.fromArray(["\uFDD0'th","Name"]),cljs.core.PersistentVector.fromArray(["\uFDD0'th","Status"])])]),cljs.core.map.call(null,multi_jenk.client.main.job,cljs.core.filter.call(null,(function (p1__298154_SHARP_){
-return cljs.core.not_EQ_.call(null,"name".call(null,p1__298154_SHARP_),cljs.core.deref.call(null,multi_jenk.client.main.job_filter));
-}),jobs__298169))])]));
+var elem__117662__auto____319740 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'div",cljs.core.PersistentVector.fromArray(["\uFDD0'h2",name__319739]),cljs.core.PersistentVector.fromArray(["\uFDD0'table.table.table-striped",cljs.core.PersistentVector.fromArray(["\uFDD0'thead",cljs.core.PersistentVector.fromArray(["\uFDD0'tr",cljs.core.PersistentVector.fromArray(["\uFDD0'th","Name"]),cljs.core.PersistentVector.fromArray(["\uFDD0'th","Status"])])]),cljs.core.map.call(null,multi_jenk.client.main.job,cljs.core.filter.call(null,(function (p1__319723_SHARP_){
+return (0 <= "name".call(null,p1__319723_SHARP_).toLowerCase().indexOf(cljs.core.deref.call(null,multi_jenk.client.main.job_filter).toLowerCase()));
+}),jobs__319738))])]));
 
-elem__117662__auto____298171.setAttribute("crateGroup",group__117661__auto____298164);
-return elem__117662__auto____298171;
+elem__117662__auto____319740.setAttribute("crateGroup",group__117661__auto____319733);
+return elem__117662__auto____319740;
 });
-multi_jenk.client.main.jobs_list.prototype._crateGroup = group__117661__auto____298164;
-var group__117661__auto____298172 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
+multi_jenk.client.main.jobs_list.prototype._crateGroup = group__117661__auto____319733;
+var group__117661__auto____319741 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
 
 multi_jenk.client.main.servers_list = (function servers_list(items){
-var elem__117662__auto____298173 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'section#results",cljs.core.map.call(null,multi_jenk.client.main.jobs_list,items)]));
+var elem__117662__auto____319742 = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0'section#results",cljs.core.map.call(null,multi_jenk.client.main.jobs_list,items)]));
 
-elem__117662__auto____298173.setAttribute("crateGroup",group__117661__auto____298172);
-return elem__117662__auto____298173;
+elem__117662__auto____319742.setAttribute("crateGroup",group__117661__auto____319741);
+return elem__117662__auto____319742;
 });
-multi_jenk.client.main.servers_list.prototype._crateGroup = group__117661__auto____298172;
+multi_jenk.client.main.servers_list.prototype._crateGroup = group__117661__auto____319741;
 multi_jenk.client.main.showJobs = (function showJobs(reply){
 jayq.core.empty.call(null,multi_jenk.client.main.$jenkins);
-var data__298174 = cljs.core.js__GT_clj.call(null,reply.target.getResponseJson());
+var data__319743 = cljs.core.js__GT_clj.call(null,reply.target.getResponseJson());
 
-return jayq.core.append.call(null,multi_jenk.client.main.$jenkins,multi_jenk.client.main.servers_list.call(null,data__298174));
+return jayq.core.append.call(null,multi_jenk.client.main.$jenkins,multi_jenk.client.main.servers_list.call(null,data__319743));
 });
 jayq.core.delegate.call(null,jayq.core.$.call(null,"\uFDD0'body"),"#jobname","\uFDD0'keyup",(function (e){
 e.preventDefault();

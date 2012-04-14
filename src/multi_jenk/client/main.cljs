@@ -30,7 +30,7 @@
                      [:tr
                       [:th "Name"]
                       [:th "Status"]]]
-                    (map job (filter #(not= ("name" %) @job-filter) jobs))]])
+                    (map job (filter #(<= 0 ( .indexOf (.toLowerCase ("name" %)) (.toLowerCase @job-filter))) jobs))]])
 
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
