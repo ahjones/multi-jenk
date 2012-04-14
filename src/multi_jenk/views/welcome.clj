@@ -21,7 +21,6 @@
 (defpage "/api/statuses" []
   (json (get-server-jobs)))
 
-(defpage "/hi" []
+(defpage "/dash" []
   (common/layout
-   [:h1#header "Jenkins Dashboard"]
-   [:div#jenkins]))
+   [:header.subhead.jumbotron [:h1 "Jenkins Dashboard"]]))

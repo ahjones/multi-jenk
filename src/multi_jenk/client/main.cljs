@@ -7,11 +7,31 @@
 
 (def $jenkins ($ :#jenkins))
 
-(defpartial job [{:strs [url color name]}] [:h3 [:a {:href url :class color} name]])
+(defn job-status-to-btn-class [status]
+  (condp = status
+    "red" "btn-danger"
+    ""))
 
-(defpartial jobs-list [{:strs [name jobs]}] [:li name (map job jobs)])
+(defn job-satus-to-status-text [status]
+  (condp = status
+    "red" "Failed"
+    "grey" "Unknown"))
 
-(defpartial servers-list [items] [:ul#servers (map jobs-list items)])
+(defpartial job [{:strs [url color name]}]
+  [:tr
+   [:td [:a {:href url} name]]
+   [:td [:button {:class (job-status-to-btn-class color)} (job-satus-to-status-text color)]]])
+
+(defpartial jobs-list [{:strs [name jobs]}]
+  [:div [:h2 name] [:table.table.table-striped
+                    [:thead
+                     [:tr
+                      [:th "Name"]
+                      [:th "Status"]]]
+                    (map job jobs)]])
+
+(defpartial servers-list [items]
+  [:section#results (map jobs-list items)])
 
 (defn showJobs [reply]
   (let [data (js->clj (.getResponseJson (.-target reply)))]

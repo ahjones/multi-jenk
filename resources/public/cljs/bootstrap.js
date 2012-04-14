@@ -12665,27 +12665,42 @@ jayq.core.off = function() {
 var multi_jenk = {client:{}};
 multi_jenk.client.main = {};
 multi_jenk.client.main.$jenkins = jayq.core.$.call(null, "\ufdd0'#jenkins");
-var group__117661__auto____186144 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.job_status_to_btn_class = function(a) {
+  return cljs.core.truth_(cljs.core._EQ_.call(null, "red", a)) ? "btn-danger" : ""
+};
+multi_jenk.client.main.job_satus_to_status_text = function(a) {
+  var b = cljs.core._EQ_;
+  if(cljs.core.truth_(b.call(null, "red", a))) {
+    return"Failed"
+  }
+  if(cljs.core.truth_(b.call(null, "grey", a))) {
+    return"Unknown"
+  }
+  throw Error(cljs.core.str.call(null, "No matching clause: ", a));
+};
+var group__117661__auto____244131 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 multi_jenk.client.main.job = function(a) {
-  var b = cljs.core.truth_(cljs.core.seq_QMARK_.call(null, a)) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "name"), c = cljs.core.get.call(null, b, "color"), b = cljs.core.get.call(null, b, "url"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'h3", cljs.core.PersistentVector.fromArray(["\ufdd0'a", cljs.core.ObjMap.fromObject(["\ufdd0'href", "\ufdd0'class"], {"\ufdd0'href":b, "\ufdd0'class":c}), a])]));
-  a.setAttribute("crateGroup", group__117661__auto____186144);
+  var b = cljs.core.truth_(cljs.core.seq_QMARK_.call(null, a)) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "name"), c = cljs.core.get.call(null, b, "color"), b = cljs.core.get.call(null, b, "url"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'tr", cljs.core.PersistentVector.fromArray(["\ufdd0'td", cljs.core.PersistentVector.fromArray(["\ufdd0'a", cljs.core.ObjMap.fromObject(["\ufdd0'href"], {"\ufdd0'href":b}), a])]), cljs.core.PersistentVector.fromArray(["\ufdd0'td", 
+  cljs.core.PersistentVector.fromArray(["\ufdd0'button", cljs.core.ObjMap.fromObject(["\ufdd0'class"], {"\ufdd0'class":multi_jenk.client.main.job_status_to_btn_class.call(null, c)}), multi_jenk.client.main.job_satus_to_status_text.call(null, c)])])]));
+  a.setAttribute("crateGroup", group__117661__auto____244131);
   return a
 };
-multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____186144;
-var group__117661__auto____186153 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____244131;
+var group__117661__auto____244140 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 multi_jenk.client.main.jobs_list = function(a) {
-  var b = cljs.core.truth_(cljs.core.seq_QMARK_.call(null, a)) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "jobs"), b = cljs.core.get.call(null, b, "name"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'li", b, cljs.core.map.call(null, multi_jenk.client.main.job, a)]));
-  a.setAttribute("crateGroup", group__117661__auto____186153);
+  var b = cljs.core.truth_(cljs.core.seq_QMARK_.call(null, a)) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "jobs"), b = cljs.core.get.call(null, b, "name"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'div", cljs.core.PersistentVector.fromArray(["\ufdd0'h2", b]), cljs.core.PersistentVector.fromArray(["\ufdd0'table.table.table-striped", cljs.core.PersistentVector.fromArray(["\ufdd0'thead", cljs.core.PersistentVector.fromArray(["\ufdd0'tr", 
+  cljs.core.PersistentVector.fromArray(["\ufdd0'th", "Name"]), cljs.core.PersistentVector.fromArray(["\ufdd0'th", "Status"])])]), cljs.core.map.call(null, multi_jenk.client.main.job, a)])]));
+  a.setAttribute("crateGroup", group__117661__auto____244140);
   return a
 };
-multi_jenk.client.main.jobs_list.prototype._crateGroup = group__117661__auto____186153;
-var group__117661__auto____186161 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.jobs_list.prototype._crateGroup = group__117661__auto____244140;
+var group__117661__auto____244148 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 multi_jenk.client.main.servers_list = function(a) {
-  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'ul#servers", cljs.core.map.call(null, multi_jenk.client.main.jobs_list, a)]));
-  a.setAttribute("crateGroup", group__117661__auto____186161);
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'section#results", cljs.core.map.call(null, multi_jenk.client.main.jobs_list, a)]));
+  a.setAttribute("crateGroup", group__117661__auto____244148);
   return a
 };
-multi_jenk.client.main.servers_list.prototype._crateGroup = group__117661__auto____186161;
+multi_jenk.client.main.servers_list.prototype._crateGroup = group__117661__auto____244148;
 multi_jenk.client.main.showJobs = function(a) {
   a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson());
   return jayq.core.append.call(null, multi_jenk.client.main.$jenkins, multi_jenk.client.main.servers_list.call(null, a))
