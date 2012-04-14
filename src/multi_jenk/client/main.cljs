@@ -25,12 +25,13 @@
    [:td [:button {:class (job-status-to-btn-class color)} (job-satus-to-status-text color)]]])
 
 (defpartial jobs-list [{:strs [name jobs]}]
-  [:div [:h2 name] [:table.table.table-striped
+  [:div.span8 [:h2 name] [:table.table.table-striped
                     [:thead
                      [:tr
-                      [:th "Name"]
+                      [:th.span6 "Name"]
                       [:th "Status"]]]
-                    (map job (filter #(<= 0 ( .indexOf (.toLowerCase ("name" %)) (.toLowerCase @job-filter))) jobs))]])
+                    (map job (filter #(<= 0 ( .indexOf (.toLowerCase ("name" %))
+                                                       (.toLowerCase @job-filter))) jobs))]])
 
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
