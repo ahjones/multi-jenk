@@ -12665,7 +12665,31 @@ jayq.core.off = function() {
 var multi_jenk = {client:{}};
 multi_jenk.client.main = {};
 multi_jenk.client.main.$jenkins = jayq.core.$.call(null, "\ufdd0'#jenkins");
-multi_jenk.client.main.$body = jayq.core.$.call(null, "\ufdd0'body");
+var group__117661__auto____162638 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.job = function(a) {
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'a", cljs.core.ObjMap.fromObject(["\ufdd0'href"], {"\ufdd0'href":"url".call(null, a)}), "name".call(null, a)]));
+  a.setAttribute("crateGroup", group__117661__auto____162638);
+  return a
+};
+multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____162638;
+var group__117661__auto____162640 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.server = function(a) {
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'li", "name".call(null, a), cljs.core.map.call(null, multi_jenk.client.main.job, "jobs".call(null, a))]));
+  a.setAttribute("crateGroup", group__117661__auto____162640);
+  return a
+};
+multi_jenk.client.main.server.prototype._crateGroup = group__117661__auto____162640;
+var group__117661__auto____162642 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.servers = function(a) {
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'ul#servers", cljs.core.map.call(null, multi_jenk.client.main.server, a)]));
+  a.setAttribute("crateGroup", group__117661__auto____162642);
+  return a
+};
+multi_jenk.client.main.servers.prototype._crateGroup = group__117661__auto____162642;
+multi_jenk.client.main.showJobs = function(a) {
+  a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson());
+  return jayq.core.append.call(null, multi_jenk.client.main.$jenkins, multi_jenk.client.main.servers.call(null, a))
+};
 multi_jenk.client.main.callback = function(a) {
   var a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson()), b = cljs.core.seq.call(null, "jobs".call(null, cljs.core.get.call(null, a, 0)));
   if(cljs.core.truth_(b)) {
@@ -12680,4 +12704,4 @@ multi_jenk.client.main.callback = function(a) {
     return null
   }
 };
-goog.net.XhrIo.send("/api/statuses", multi_jenk.client.main.callback);
+goog.net.XhrIo.send("/api/statuses", multi_jenk.client.main.showJobs);
