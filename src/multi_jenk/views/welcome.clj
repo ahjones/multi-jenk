@@ -23,5 +23,4 @@
 
 (defpage "/hi" []
   (common/layout
-   [:p "Hello world"]
    [:div#jenkins]))
