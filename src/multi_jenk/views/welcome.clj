@@ -23,4 +23,5 @@
 
 (defpage "/hi" []
   (common/layout
+   [:h1#header "Jenkins Dashboard"]
    [:div#jenkins]))
