@@ -7,8 +7,8 @@
 
 (def $jenkins ($ :#jenkins))
 
-(defpartial job [item]
-  [:h3 [:a {:href ("url" item)} ("name" item)]])
+(defpartial job [{:strs [url color name]}]
+  [:h3 [:a {:href url :class color} name]])
 
 (defpartial jobs-list [jobs]
   [:li ("name" jobs)
