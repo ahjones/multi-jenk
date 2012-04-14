@@ -12665,29 +12665,29 @@ jayq.core.off = function() {
 var multi_jenk = {client:{}};
 multi_jenk.client.main = {};
 multi_jenk.client.main.$jenkins = jayq.core.$.call(null, "\ufdd0'#jenkins");
-var group__117661__auto____164780 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+var group__117661__auto____173312 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 multi_jenk.client.main.job = function(a) {
-  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'a", cljs.core.ObjMap.fromObject(["\ufdd0'href"], {"\ufdd0'href":"url".call(null, a)}), "name".call(null, a)]));
-  a.setAttribute("crateGroup", group__117661__auto____164780);
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'h3", cljs.core.PersistentVector.fromArray(["\ufdd0'a", cljs.core.ObjMap.fromObject(["\ufdd0'href"], {"\ufdd0'href":"url".call(null, a)}), "name".call(null, a)])]));
+  a.setAttribute("crateGroup", group__117661__auto____173312);
   return a
 };
-multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____164780;
-var group__117661__auto____164782 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
-multi_jenk.client.main.server = function(a) {
+multi_jenk.client.main.job.prototype._crateGroup = group__117661__auto____173312;
+var group__117661__auto____173314 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.jobs_list = function(a) {
   a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'li", "name".call(null, a), cljs.core.map.call(null, multi_jenk.client.main.job, "jobs".call(null, a))]));
-  a.setAttribute("crateGroup", group__117661__auto____164782);
+  a.setAttribute("crateGroup", group__117661__auto____173314);
   return a
 };
-multi_jenk.client.main.server.prototype._crateGroup = group__117661__auto____164782;
-var group__117661__auto____164784 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
-multi_jenk.client.main.servers = function(a) {
-  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'ul#servers", cljs.core.map.call(null, multi_jenk.client.main.server, a)]));
-  a.setAttribute("crateGroup", group__117661__auto____164784);
+multi_jenk.client.main.jobs_list.prototype._crateGroup = group__117661__auto____173314;
+var group__117661__auto____173316 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+multi_jenk.client.main.servers_list = function(a) {
+  a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'ul#servers", cljs.core.map.call(null, multi_jenk.client.main.jobs_list, a)]));
+  a.setAttribute("crateGroup", group__117661__auto____173316);
   return a
 };
-multi_jenk.client.main.servers.prototype._crateGroup = group__117661__auto____164784;
+multi_jenk.client.main.servers_list.prototype._crateGroup = group__117661__auto____173316;
 multi_jenk.client.main.showJobs = function(a) {
   a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson());
-  return jayq.core.append.call(null, multi_jenk.client.main.$jenkins, multi_jenk.client.main.servers.call(null, a))
+  return jayq.core.append.call(null, multi_jenk.client.main.$jenkins, multi_jenk.client.main.servers_list.call(null, a))
 };
 goog.net.XhrIo.send("/api/statuses", multi_jenk.client.main.showJobs);

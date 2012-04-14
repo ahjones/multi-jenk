@@ -8,18 +8,18 @@
 (def $jenkins ($ :#jenkins))
 
 (defpartial job [item]
-  [:a {:href ("url" item)} ("name" item)])
+  [:h3 [:a {:href ("url" item)} ("name" item)]])
 
-(defpartial server [jobs]
+(defpartial jobs-list [jobs]
   [:li ("name" jobs)
    (map job ("jobs" jobs))])
 
-(defpartial servers [items]
+(defpartial servers-list [items]
   [:ul#servers
-   (map server items)])
+   (map jobs-list items)])
 
 (defn showJobs [reply]
   (let [data (js->clj (.getResponseJson (.-target reply)))]
-    (append $jenkins (servers data))))
+    (append $jenkins (servers-list data))))
 
 (.send goog.net.XhrIo "/api/statuses" showJobs)
