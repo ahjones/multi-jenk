@@ -3,9 +3,11 @@
             [cljs.reader :as reader]
             [goog.net.XhrIo :as xhr])
   (:use-macros [crate.macros :only [defpartial]])
-  (:use [jayq.core :only [$ append delegate data]]))
+  (:use [jayq.core :only [$ empty append delegate data text]]))
 
 (def $jenkins ($ :#jenkins))
+
+(def job-filter (atom ""))
 
 (defn job-status-to-btn-class [status]
   (condp = status
@@ -28,13 +30,23 @@
                      [:tr
                       [:th "Name"]
                       [:th "Status"]]]
-                    (map job jobs)]])
+                    (map job (filter #(not= ("name" %) @job-filter) jobs))]])
 
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
 
 (defn showJobs [reply]
+  (empty $jenkins)
   (let [data (js->clj (.getResponseJson (.-target reply)))]
     (append $jenkins (servers-list data))))
 
-(.send goog.net.XhrIo "/api/statuses" showJobs)
+(delegate ($ :body) "#jobname" :keyup
+          (fn [e]
+            (.preventDefault e)
+            (swap! job-filter (fn [x] (.-value (.-target e))))
+            (go)))
+
+(defn go []
+  (.send goog.net.XhrIo "/api/statuses" showJobs))
+
+(go)

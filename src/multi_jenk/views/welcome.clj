@@ -23,4 +23,6 @@
 
 (defpage "/dash" []
   (common/layout
-   [:header.subhead.jumbotron [:h1 "Jenkins Dashboard"]]))
+   [:header.subhead.jumbotron [:h1 "Jenkins Dashboard"]]
+   [:input#jobname.span4 {:type "text"}]
+   [:div#jenkins]))

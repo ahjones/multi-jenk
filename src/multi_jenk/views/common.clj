@@ -11,6 +11,6 @@
                (include-css "/css/bootstrap.css")
                (include-css "/css/bootstrap-responsive.css")]
               [:body
-               [:div#jenkins.container
+               [:div#page.container
                 content]
                (include-js "/cljs/bootstrap.js")]))
