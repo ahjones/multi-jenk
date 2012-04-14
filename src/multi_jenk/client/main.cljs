@@ -7,16 +7,11 @@
 
 (def $jenkins ($ :#jenkins))
 
-(defpartial job [{:strs [url color name]}]
-  [:h3 [:a {:href url :class color} name]])
+(defpartial job [{:strs [url color name]}] [:h3 [:a {:href url :class color} name]])
 
-(defpartial jobs-list [{:strs [name jobs]}]
-  [:li name
-   (map job jobs)])
+(defpartial jobs-list [{:strs [name jobs]}] [:li name (map job jobs)])
 
-(defpartial servers-list [items]
-  [:ul#servers
-   (map jobs-list items)])
+(defpartial servers-list [items] [:ul#servers (map jobs-list items)])
 
 (defn showJobs [reply]
   (let [data (js->clj (.getResponseJson (.-target reply)))]
