@@ -10,9 +10,9 @@
 (defpartial job [{:strs [url color name]}]
   [:h3 [:a {:href url :class color} name]])
 
-(defpartial jobs-list [jobs]
-  [:li ("name" jobs)
-   (map job ("jobs" jobs))])
+(defpartial jobs-list [{:strs [name jobs]}]
+  [:li name
+   (map job jobs)])
 
 (defpartial servers-list [items]
   [:ul#servers
