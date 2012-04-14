@@ -21,6 +21,7 @@
 (defpage "/api/statuses" []
   (json (get-server-jobs)))
 
-(defpage "/hi/there" []
+(defpage "/hi" []
   (common/layout
+   [:p "Hello world"]
    [:div#jenkins]))
