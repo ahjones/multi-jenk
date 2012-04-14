@@ -22,9 +22,4 @@
   (let [data (js->clj (.getResponseJson (.-target reply)))]
     (append $jenkins (servers data))))
 
-(defn callback [reply]
-  ;(.log js/console "hi")
-  (let [servers (js->clj (.getResponseJson (.-target reply)))]
-    (doseq [job ("jobs" (get servers 0))] (append $jenkins (crate/html [:p ("name" job)])))))
-
 (.send goog.net.XhrIo "/api/statuses" showJobs)
