@@ -8,19 +8,19 @@
 
 (def jenkins-servers [{:name "Demo" :location "http://33.33.33.10:8080"}])
 
-(defpage "/servers" []
+(defpage "/api/servers" []
   (json jenkins-servers))
 
-(defn get-server-status [url]
+(defn get-server-job [url]
   (json/parse-string (:body (client/get (str url "/api/json"))) true))
 
-(defn get-server-statuses []
+(defn get-server-jobs []
   (for [server jenkins-servers]
-    {:name (:name server) :status (:jobs (get-server-status (:location server)))}))
+    {:name (:name server) :jobs (:jobs (get-server-job (:location server)))}))
 
-(defpage "/statuses" []
-  (json (get-server-statuses)))
+(defpage "/api/statuses" []
+  (json (get-server-jobs)))
 
-(defpage "/welcome" []
-         (common/layout
-           [:p "Welcome to multi-jenk"]))
+(defpage "/hi/there" []
+  (common/layout
+   [:div#jenkins]))
