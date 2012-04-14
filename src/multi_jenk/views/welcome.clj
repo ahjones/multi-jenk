@@ -12,10 +12,14 @@
   (json jenkins-servers))
 
 (defn get-server-status [url]
-  (json/parse-string (:body (client/get url))))
+  (json/parse-string (:body (client/get (str url "/api/json"))) true))
+
+(defn get-server-statuses []
+  (for [server jenkins-servers]
+    {:name (:name server) :status (:jobs (get-server-status (:location server)))}))
 
 (defpage "/statuses" []
-  (json (get-server-status "http://33.33.33.10:8080/api/json")))
+  (json (get-server-statuses)))
 
 (defpage "/welcome" []
          (common/layout
