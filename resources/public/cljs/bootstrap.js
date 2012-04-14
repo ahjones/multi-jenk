@@ -12667,7 +12667,17 @@ multi_jenk.client.main = {};
 multi_jenk.client.main.$jenkins = jayq.core.$.call(null, "\ufdd0'#jenkins");
 multi_jenk.client.main.$body = jayq.core.$.call(null, "\ufdd0'body");
 multi_jenk.client.main.callback = function(a) {
-  a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson());
-  return jayq.core.append.call(null, multi_jenk.client.main.$jenkins, crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'p", "name".call(null, cljs.core.get.call(null, a, 0))])))
+  var a = cljs.core.js__GT_clj.call(null, a.target.getResponseJson()), b = cljs.core.seq.call(null, "jobs".call(null, cljs.core.get.call(null, a, 0)));
+  if(cljs.core.truth_(b)) {
+    for(a = cljs.core.first.call(null, b);;) {
+      if(jayq.core.append.call(null, multi_jenk.client.main.$jenkins, crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'p", "name".call(null, a)]))), a = cljs.core.next.call(null, b), cljs.core.truth_(a)) {
+        b = a, a = cljs.core.first.call(null, b)
+      }else {
+        return null
+      }
+    }
+  }else {
+    return null
+  }
 };
 goog.net.XhrIo.send("/api/statuses", multi_jenk.client.main.callback);

@@ -11,6 +11,6 @@
 (defn callback [reply]
   ;(.log js/console "hi")
   (let [servers (js->clj (.getResponseJson (.-target reply)))]
-    (append $jenkins (crate/html [:p ("name" (get servers 0))]))))
+    (doseq [job ("jobs" (get servers 0))] (append $jenkins (crate/html [:p ("name" job)])))))
 
 (.send goog.net.XhrIo "/api/statuses" callback)
