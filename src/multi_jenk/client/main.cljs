@@ -12,18 +12,20 @@
 
 (defn job-status-to-btn-class [status]
   (condp = status
-    "red" "btn-danger"
+    "red" "label-important"
+    "blue" "label-success"
     ""))
 
 (defn job-satus-to-status-text [status]
   (condp = status
     "red" "Failed"
-    "grey" "Unknown"))
+    "blue" "OK"
+    "Unknown"))
 
 (defpartial job [{:strs [url color name]}]
   [:tr
    [:td [:a {:href url} name]]
-   [:td [:button {:class (job-status-to-btn-class color)} (job-satus-to-status-text color)]]])
+   [:td [:span {:class (str "label " (job-status-to-btn-class color))} (job-satus-to-status-text color)]]])
 
 (defpartial jobs-list [{:strs [name jobs]}]
   [:div.span8 [:h2 name] [:table.table.table-striped

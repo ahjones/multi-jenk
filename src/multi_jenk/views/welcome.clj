@@ -20,19 +20,20 @@
 (defpage "/api/servers" []
   (json jenkins-servers))
 
+(defn parse-json [json]
+  (json/parse-string json true))
+
 (defn get-server-job [url]
-  (try {:jobs (:jobs (json/parse-string (:body (client/get (str url "/api/json") {:socket-timeout 5000})) true))}
+  (try {:jobs
+        (:jobs
+         (parse-json (:body (client/get (str url "/api/json") {:socket-timeout 5000}))))}
        (catch Exception e {:problem (.getMessage e)})))
 
 (defn get-server-jobs [{:keys [name location]}]
   (merge {:name name} (get-server-job location)))
 
 (defn multi-get [servers]
-  (as-futures [server servers]
-              (get-server-jobs server)
-              :as results
-              =>
-              (for [result results] @result)))
+  (as-futures [server servers] (get-server-jobs server) :as results => (for [result results] @result)))
 
 (defpage "/api/statuses" []
   (json (multi-get jenkins-servers)))
