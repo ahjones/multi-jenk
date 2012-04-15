@@ -22,8 +22,8 @@
 (defn get-server-job [url]
   (json/parse-string (:body (client/get (str url "/api/json"))) true))
 
-(defn get-server-jobs [server]
-  {:name (:name server) :jobs (:jobs (get-server-job (:location server)))})
+(defn get-server-jobs [{:keys [name location]}]
+  {:name name :jobs (:jobs (get-server-job location))})
 
 (defn multi-get [servers]
   (as-futures [server servers]
