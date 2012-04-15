@@ -7,7 +7,8 @@
         [hiccup.core :only [html]]))
 
 (def jenkins-servers [{:name "Demo" :location "http://33.33.33.10:8080"}
-                      {:name "Demo2" :location "http://33.33.33.10:8080"}])
+                      {:name "Demo2" :location "http://33.33.33.10:8081"}
+                      {:name "Timeout" :location "http://localhost:1234"}])
 
 (defmacro as-futures [[a args] & body]
   (let [parts (partition-by #{'=>} body)
@@ -20,10 +21,11 @@
   (json jenkins-servers))
 
 (defn get-server-job [url]
-  (json/parse-string (:body (client/get (str url "/api/json"))) true))
+  (try {:jobs (:jobs (json/parse-string (:body (client/get (str url "/api/json"))) true))}
+       (catch Exception e {:problem (.getMessage e)})))
 
 (defn get-server-jobs [{:keys [name location]}]
-  {:name name :jobs (:jobs (get-server-job location))})
+  (merge {:name name} (get-server-job location)))
 
 (defn multi-get [servers]
   (as-futures [server servers]
