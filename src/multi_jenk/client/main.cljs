@@ -50,16 +50,6 @@
             (swap! job-filter (fn [x] (.-value (.-target e))))
             (go)))
 
-(defn storage-put [key value]
-  (.setItem (.-localStorage (dom/getWindow)) key value))
-
-(defn storage-get [key]
-  (.getItem (.-localStorage (dom/getWindow)) key))
-
-(defn go []
-  (.send goog.net.XhrIo "/api/statuses" showJobs))
-
-;(storage-put "andrew" "jones")
-;(.log js/console (storage-get "andrew"))
+(defn go [] (.send goog.net.XhrIo "/api/statuses" showJobs))
 
 (go)
