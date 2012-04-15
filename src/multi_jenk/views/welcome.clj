@@ -21,7 +21,7 @@
   (json jenkins-servers))
 
 (defn get-server-job [url]
-  (try {:jobs (:jobs (json/parse-string (:body (client/get (str url "/api/json"))) true))}
+  (try {:jobs (:jobs (json/parse-string (:body (client/get (str url "/api/json") {:socket-timeout 5000})) true))}
        (catch Exception e {:problem (.getMessage e)})))
 
 (defn get-server-jobs [{:keys [name location]}]
