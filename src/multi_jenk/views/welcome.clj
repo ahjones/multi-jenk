@@ -22,10 +22,6 @@
 (defn get-server-job [url]
   (json/parse-string (:body (client/get (str url "/api/json"))) true))
 
-(defn get-servers-jobs []
-  (for [server jenkins-servers]
-    {:name (:name server) :jobs (:jobs (get-server-job (:location server)))}))
-
 (defn get-server-jobs [server]
   {:name (:name server) :jobs (:jobs (get-server-job (:location server)))})
 
