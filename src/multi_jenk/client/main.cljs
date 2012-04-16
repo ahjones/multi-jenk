@@ -50,6 +50,6 @@
             (swap! job-filter (fn [x] (.-value (.-target e))))
             (go)))
 
-(defn go [] (.send goog.net.XhrIo "/api/statuses" showJobs))
+(defn go [] (.send goog.net.XhrIo "api/statuses" showJobs))
 
 (go)

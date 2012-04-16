@@ -6,6 +6,8 @@
                            [clj-http "0.3.6"]
                            [cheshire "4.0.0"]
                            [crate "0.1.0-alpha3"]]
+            :dev-dependencies [[lein-ring "0.5.4"]]
+            :ring {:handler multi-jenk.server/handler}
             :cljsbuild {:builds
                         [{:builds nil,
                           :source-path "src"
