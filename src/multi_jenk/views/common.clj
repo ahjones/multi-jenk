@@ -7,10 +7,10 @@
               [:head
                [:title "multi-jenk"]
                (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
-               (include-js "/js/bootstrap.js")
-               (include-css "/css/bootstrap.css")
-               (include-css "/css/bootstrap-responsive.css")]
+               (include-js "js/bootstrap.js")
+               (include-css "css/bootstrap.css")
+               (include-css "css/bootstrap-responsive.css")]
               [:body
                [:div#page.container
                 content]
-               (include-js "/cljs/bootstrap.js")]))
+               (include-js "cljs/bootstrap.js")]))
