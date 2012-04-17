@@ -4,7 +4,7 @@
 
 ;;(server/load-views "src/multi_jenk/views/")
 
-(def handler (server/gen-handler {:mode :dev :ns 'multi-jenk}))
+(def handler (server/gen-handler {:mode :dev :ns 'multi-jenk :bsae-url "/multi-jenk"}))
 
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
