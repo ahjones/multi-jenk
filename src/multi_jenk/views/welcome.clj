@@ -36,11 +36,10 @@
   (as-futures [server servers] (get-server-jobs server) :as results => (for [result results] @result)))
 
 (defpage "/api/statuses" {:keys [server]}
-  (json (if server
-          (let [servers (clojure.string/split server #",")]
-            (multi-get (filter #(some #{(:name %)} servers) jenkins-servers)))
-
-          (multi-get jenkins-servers))))
+  (json (multi-get (if server
+                     (let [servers (clojure.string/split server #",")]
+                       (filter #(some #{(:name %)} servers) jenkins-servers))
+                     jenkins-servers))))
 
 (defpage "/api/status" {:keys [server]}
   (json (clojure.string/split server #",")))
