@@ -18,7 +18,8 @@
        ~@task)))
 
 (defpage "/api/servers" []
-  (json jenkins-servers))
+  (json (for [server jenkins-servers]
+          (conj server [:info (str "api/statuses?server=" (:name server))]))))
 
 (defn parse-json [json]
   (json/parse-string json true))

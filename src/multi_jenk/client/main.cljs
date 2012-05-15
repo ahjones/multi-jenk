@@ -9,6 +9,8 @@
 (def $jenkins ($ :#jenkins))
 
 (def job-filter (atom ""))
+(def jobs (atom {}))
+(def servers (atom {}))
 
 (defn job-status-to-btn-class [status]
   (condp = status
@@ -39,10 +41,12 @@
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
 
+(defn reply->clojure [reply]
+  (js->clj (.getResponseJson (.-target reply))))
+
 (defn showJobs [reply]
   (empty $jenkins)
-  (let [data (js->clj (.getResponseJson (.-target reply)))]
-    (append $jenkins (servers-list data))))
+  (append $jenkins (servers-list (reply->clojure reply))))
 
 (delegate ($ :body) "#jobname" :keyup
           (fn [e]
@@ -50,6 +54,12 @@
             (swap! job-filter (fn [x] (.-value (.-target e))))
             (go)))
 
-(defn go [] (.send goog.net.XhrIo "api/statuses" showJobs))
+(defn got-servers [reply]
+  (let [rep-servers (reply->clojure reply)]
+    (doseq [server rep-servers] (swap! servers assoc (:name rep-servers) (:info rep-servers))))
+  (doseq [server @servers] ( .log js/console (str server))))
 
+(defn get-servers [] (.send goog.net.XhrIo "api/servers" got-servers))
+
+(defn go [] (.send goog.net.XhrIo "api/statuses" showJobs) (get-servers))
 (go)
