@@ -1,6 +1,7 @@
 # multi-jenk
 
-A website written in noir. 
+A website to show the status of many different Jenkins servers at the
+same time.
 
 ## Usage
 
@@ -11,7 +12,7 @@ lein run
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2011 Andrew Jones @andrew_jones.
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
