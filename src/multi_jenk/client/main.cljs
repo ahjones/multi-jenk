@@ -38,6 +38,9 @@
                     (map job (filter #(<= 0 ( .indexOf (.toLowerCase ("name" %))
                                                        (.toLowerCase @job-filter))) jobs))]])
 
+(defpartial render-server [name info-url]
+  [:p [:h1 name] [:h2 info-url]])
+
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
 
@@ -56,10 +59,14 @@
 
 (defn got-servers [reply]
   (let [rep-servers (reply->clojure reply)]
-    (doseq [server rep-servers] (swap! servers assoc (:name rep-servers) (:info rep-servers))))
-  (doseq [server @servers] ( .log js/console (str server))))
+    (doseq [server rep-servers]
+      (let [{:strs [name info]} server]
+        (swap! servers assoc name info)
+        (append $jenkins (render-server name info))))))
 
-(defn get-servers [] (.send goog.net.XhrIo "api/servers" got-servers))
+(defn call-with-callback [path callback]
+  (.send goog.net.XhrIo path callback))
 
-(defn go [] (.send goog.net.XhrIo "api/statuses" showJobs) (get-servers))
+(defn go [] (call-with-callback "api/servers" got-servers))
+
 (go)
