@@ -5,3 +5,5 @@ pom.xml
 .lein-plugins/
 .lein-deps-sum
 *~
+\#*
+.\#*
