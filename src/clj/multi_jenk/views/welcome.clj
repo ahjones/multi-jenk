@@ -6,8 +6,7 @@
         [noir.response :only [json]]
         [hiccup.core :only [html]]))
 
-(def jenkins-servers [{:name "Demo" :location "http://33.33.33.10:8080"}
-                      {:name "Demo2" :location "http://33.33.33.10:8081"}
+(def jenkins-servers [{:name "Demo2" :location "http://33.33.33.10:8081"}
                       {:name "Timeout" :location "http://localhost:1234"}])
 
 (defmacro as-futures [[a args] & body]

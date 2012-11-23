@@ -3,14 +3,12 @@
             [cljs.reader :as reader]
             [goog.net.XhrIo :as xhr]
             [goog.dom :as dom])
-  (:use-macros [crate.macros :only [defpartial]])
+  (:use-macros [crate.def-macros :only [defpartial]])
   (:use [jayq.core :only [$ empty append delegate data text]]))
 
 (def $jenkins ($ :#jenkins))
 
 (def job-filter (atom ""))
-(def jobs (atom {}))
-(def servers (atom {}))
 
 (defn job-status-to-btn-class [status]
   (condp = status
@@ -38,18 +36,13 @@
                     (map job (filter #(<= 0 ( .indexOf (.toLowerCase ("name" %))
                                                        (.toLowerCase @job-filter))) jobs))]])
 
-(defpartial render-server [name info-url]
-  [:p [:h1 name] [:h2 info-url]])
-
 (defpartial servers-list [items]
   [:section#results (map jobs-list items)])
 
-(defn reply->clojure [reply]
-  (js->clj (.getResponseJson (.-target reply))))
-
 (defn showJobs [reply]
   (empty $jenkins)
-  (append $jenkins (servers-list (reply->clojure reply))))
+  (let [data (js->clj (.getResponseJson (.-target reply)))]
+    (append $jenkins (servers-list data))))
 
 (delegate ($ :body) "#jobname" :keyup
           (fn [e]
@@ -57,16 +50,4 @@
             (swap! job-filter (fn [x] (.-value (.-target e))))
             (go)))
 
-(defn got-servers [reply]
-  (let [rep-servers (reply->clojure reply)]
-    (doseq [server rep-servers]
-      (let [{:strs [name info]} server]
-        (swap! servers assoc name info)
-        (append $jenkins (render-server name info))))))
-
-(defn call-with-callback [path callback]
-  (.send goog.net.XhrIo path callback))
-
-(defn go [] (call-with-callback "api/servers" got-servers))
-
-(go)
+(defn go [] (.send goog.net.XhrIo "api/statuses" showJobs))

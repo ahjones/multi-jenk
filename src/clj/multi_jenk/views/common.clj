@@ -13,4 +13,5 @@
               [:body
                [:div#page.container
                 content]
-               (include-js "/cljs/bootstrap.js")]))
+               (include-js "/cljs/bootstrap.js")
+               [:script {:type "text/javascript"} "multi_jenk.client.main.go();"]]))
